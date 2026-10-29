@@ -1,0 +1,24 @@
+
+polka.maark.ru {
+    root * /srv/site/polka/current
+    encode zstd gzip
+    request_body {
+        max_size 21MB
+    }
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        Strict-Transport-Security "max-age=31536000"
+        Cache-Control no-cache
+        -Server
+    }
+    handle /api/* {
+        reverse_proxy 127.0.0.1:8195
+    }
+    handle {
+        respond /healthz "ok" 200
+        file_server
+    }
+}

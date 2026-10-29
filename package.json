@@ -1,0 +1,9 @@
+{
+  "name": "na-polku",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check public/app.js && node --check public/studio.js && node --check public/cloud.js && node --check public/sync.js && node check-data.mjs && node check-sync.mjs"
+  }
+}

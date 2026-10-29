@@ -1,0 +1,24 @@
+[Unit]
+Description=Na Polku private sync API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=polka
+Group=polka
+WorkingDirectory=/opt/polka/current
+Environment=POLKA_DATABASE=/opt/polka/data/polka.sqlite3
+Environment=POLKA_ORIGIN=https://polka.maark.ru
+ExecStart=/opt/polka/venv/bin/gunicorn --bind 127.0.0.1:8195 --workers 2 --threads 2 --timeout 60 --error-logfile - 'api:create_app()'
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/polka/data
+
+[Install]
+WantedBy=multi-user.target

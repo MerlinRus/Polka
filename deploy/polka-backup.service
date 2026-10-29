@@ -1,0 +1,12 @@
+[Unit]
+Description=Backup Na Polku SQLite database
+
+[Service]
+Type=oneshot
+User=polka
+Group=polka
+UMask=0077
+ExecStart=/usr/bin/python3 /opt/polka/current/backup.py
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/polka/data /opt/polka/backups

@@ -1,0 +1,12 @@
+.codegraph/
+.cursor/
+__pycache__/
+*.pyc
+.venv/
+data/
+*.env
+*.sqlite*
+*.tar.gz
+deploy/*.png
+deploy/*.jpg
+
